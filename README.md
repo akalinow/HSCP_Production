@@ -31,16 +31,16 @@ The jobs are submitted with a single command:
 ./submitJobs.py
 ```
 
-The [submitJobs.py](submitJobs.py) script contains following control (parameters)[submitJobs.py#L95-L102]
+The [submitJobs.py](submitJobs.py) script contains following control (parameters)[https://github.com/akalinow/HSCP_Production/blob/main/submitJobs.py#L95-L102]
 
-* era - choose the era: "16", "17", "18"
-* eventsPerJob - number of events to be generated per job. Job for 100 events takes about 40'. Recomended
+* **era** - choose the era: "16", "17", "18"
+* **eventsPerJob** - number of events to be generated per job. Job for 100 events takes about 40'. Recomended
   job time is 8 hours.
-* numberOfJobs - number of jobs. Total number generated of events  will be eventsPerJob*numberOfJobs
-* outLFNDirBase - Logical File Name base directory for storing the output on SE, for example "/store/user/akalinow/HSCP/"
+* **numberOfJobs** - number of jobs. Total number generated of events  will be eventsPerJob*numberOfJobs
+* **outLFNDirBase** - Logical File Name base directory for storing the output on SE, for example */store/user/akalinow/HSCP/*
   The results will be stored in subdirectories created automatically.
-* storage_element - name of the SE, for example "T2_PL_Swierk"
-* outputDatasetTag - tag added to the name of the dataset. The dataset name will contain the name decoded from the genration fragment, for example,
-  and the tag, for example: "/HSCPstop_M_800_TuneCP5_13TeV_pythia8/akalinow-UL16_test5-b6985cf6814c45f9caab5150d241ebd2/USER"
-* runLocal - a flag for running a local test. If set to True the Crab job wil not be submitted, indteas a local cmsRun wil be called
+* **storage_element** - name of the SE, for example *T2_PL_Swierk*
+* **outputDatasetTag** - tag added to the name of the dataset. The dataset name will contain the name decoded from the genration fragment, for example,
+  and the tag, for example: */HSCPstop_M_800_TuneCP5_13TeV_pythia8/akalinow-UL16_test5-b6985cf6814c45f9caab5150d241ebd2/USER*
+* **runLocal** - a flag for running a local test. If set to True the Crab job wil not be submitted, indteas a local cmsRun wil be called
   for a single batch of eventsPerJob events
