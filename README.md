@@ -1,20 +1,20 @@
 ## Introduction
 
 This is a script for submitting the Ultra Legacy (UL) production to WLCG Grid.
-The full simulation chain: GEN-SIM-RECO is made withis a single Crab job
-See [runAllSteps_UL18.py](runAllSteps_UL18.py) for details.
+The full simulation chain: GEN-SIM-RECO is made within a single Crab job.
+The GEN configuration is created within the [submitJobs.py](submitJobs.py) file, rest
+inside [runAllSteps_UL18.py](runAllSteps_UL18.py) files executed on grid.
 Configuration files for each step are generated using the cmsDriver with
-parameters taken from official [MuonPOGMcMRequests](https://twiki.cern.ch/twiki/bin/view/CMS/MuonPOGMcMRequests),
-for example UL18 was taken from config under this
-[link](https://cms-pdmv.cern.ch/mcm/chained_requests?prepid=MUO-chain_RunIISummer19UL18wmLHEGEN_flowRunIISummer19UL18SIM_flowRunIISummer19UL18DIGIPremix_flowRunIISummer19
-UL18HLT_flowRunIISummer19UL18RECO_flowRunIISummer19UL18MiniAOD_flowRunIISummer19UL18NanoAOD-00011)
+parameters taken from official [MuonPOGMcMRequests](https://twiki.cern.ch/twiki/bin/view/CMS/MuonPOGMcMRequests).
+For example the UL18 configuration was taken from production configuration under this
+[link](https://cms-pdmv.cern.ch/mcm/chained_requests?prepid=MUO-chain_RunIISummer19UL18wmLHEGEN_flowRunIISummer19UL18SIM_flowRunIISummer19UL18DIGIPremix_flowRunIISummer19UL18HLT_flowRunIISummer19UL18RECO_flowRunIISummer19UL18MiniAOD_flowRunIISummer19UL18NanoAOD-00011)
 
 The output of the final step: RECO is saved to selected T2 storage elementt (SE), and a dataset is published to
 DBS for further usage, like [those test samples](https://cmsweb.cern.ch/das/request?view=list&limit=50&instance=prod%2Fphys03&input=dataset%3D%2F*%2Fakalinow-UL*%2FUSER)
 
 ## Installation instructions:
 
-* setup the CMSSW_10_6_12 work are according to the TWiki
+* setup the CMSSW_10_6_12 work are according to the
   [TWiki](https://twiki.cern.ch/twiki/bin/viewauth/CMS/HSCPRun2Simulation#Instructions_to_produce_UL_HSCP)
 
 * fetch this respository:
@@ -31,7 +31,7 @@ The jobs are submitted with a single command:
 ./submitJobs.py
 ```
 
-The [submitJobs.py](submitJobs.py) script contains following control parameters:
+The [submitJobs.py](submitJobs.py) script contains following control (parameters)[submitJobs.py#L95-L102]
 
 * era - choose the era: "16", "17", "18"
 * eventsPerJob - number of events to be generated per job. Job for 100 events takes about 40'. Recomended
