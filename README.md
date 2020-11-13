@@ -31,8 +31,10 @@ The jobs are submitted with a single command:
 ./submitJobs.py
 ```
 
-The [submitJobs.py](submitJobs.py) script contains following control (parameters)[https://github.com/akalinow/HSCP_Production/blob/main/submitJobs.py#L95-L102]
+The [submitJobs.py](submitJobs.py) script contains following control [parameters](https://github.com/akalinow/HSCP_Production/blob/main/submitJobs.py#L95-L102)
 
+* **generator_fragments** - a list of generator framgments names, assuming its base directory as
+  *$CMSSW_BASE/src/Configuration/GenProduction/python/ThirteenTeV/HSCP/*
 * **era** - choose the era: "16", "17", "18"
 * **eventsPerJob** - number of events to be generated per job. Job for 100 events takes about 40'. Recomended
   job time is 8 hours.

@@ -17,7 +17,7 @@ def createGenSimFramgent(era, generator_fragment):
         cmssw8_fix = "--outputCommands 'drop *_*_StoppedParticlesName_*' "
         
     command = "cmsDriver.py " +\
-    "Configuration/GenProduction/python/ThirteenTeV/HSCP/"+generator_fragment+\
+    "Configuration/GenProduction/python/ThirteenTeV/HSCP/"+generator_fragment+" "\
     "--fileout file:RECO.root " +\
     "--mc --eventcontent RAWSIM --datatier GEN-SIM-DIGI "+\
     eras_conditions[era] +" "+\
@@ -73,6 +73,7 @@ def prepareCrabCfg(era,
     config.Data.totalUnits = eventsPerJob*numberOfJobs
 
     createGenSimFramgent(era, generator_fragment)
+
     if runLocal:
         os.system("cp GEN_SIM_DIGI_RAW_step_cfg.py PSet.py; ./"+config.JobType.scriptExe)
     else:    
@@ -80,21 +81,20 @@ def prepareCrabCfg(era,
     os.system("rm -f GEN_SIM_DIGI_RAW_step_cfg.py")
 #########################################
 #########################################
-CMSSW_BASE = os.environ.get("CMSSW_BASE")
-genFragmentsDirectory = CMSSW_BASE + "/src/"+ "Configuration/GenProduction/python/ThirteenTeV/HSCP/"
-generator_fragments = [aFile.split("/")[-1] for aFile in glob.glob(genFragmentsDirectory+"HSCPstop*.py")]
-##TEST
-generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py"]
-                       
 eras_conditions = {
     "18":"--era Run2_2018 --conditions 106X_upgrade2018_realistic_v11_L1v1 --beamspot Realistic25ns13TeVEarly2018Collision ",
     "17":"--era Run2_2017 --conditions 106X_mc2017_realistic_v6 --beamspot Realistic25ns13TeVEarly2017Collision ",
     "16":"--era Run2_2016 --conditions 106X_mcRun2_asymptotic_v13 --beamspot Realistic25ns13TeV2016Collision "
     }
 
+CMSSW_BASE = os.environ.get("CMSSW_BASE")
+genFragmentsDirectory = CMSSW_BASE + "/src/"+ "Configuration/GenProduction/python/ThirteenTeV/HSCP/"
+generator_fragments = [aFile.split("/")[-1] for aFile in glob.glob(genFragmentsDirectory+"HSCPstop*.py")]
+
 ##Those are the steering parameters
+generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py"]
 era = "18"
-eventsPerJob = 100
+eventsPerJob = 3
 numberOfJobs = 5
 outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
@@ -107,7 +107,7 @@ for aFragment in generator_fragments:
                    eventsPerJob=eventsPerJob,
                    numberOfJobs=numberOfJobs,
                    outLFNDirBase = outLFNDirBase, 
-                   storage_element=torage_element,
+                   storage_element=storage_element,
                    outputDatasetTag = outputDatasetTag,
                    runLocal=runLocal)  
 ########################################################
