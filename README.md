@@ -46,3 +46,4 @@ The [submitJobs.py](submitJobs.py) script contains following control [parameters
   and the tag, for example: */HSCPstop_M_800_TuneCP5_13TeV_pythia8/akalinow-UL16_test5-b6985cf6814c45f9caab5150d241ebd2/USER*
 * **runLocal** - a flag for running a local test. If set to *True* the Crab job will not be submitted, instead a local cmsRun will be called
   for a single batch of eventsPerJob events
+* **withPileUp** - a flag enabling digitization with pileup  

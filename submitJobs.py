@@ -10,24 +10,31 @@ import CRABClient
 from CRABAPI.RawCommand import crabCommand
 from crab3 import *
 
-def createGenSimFramgent(era, generator_fragment):
+def createGenSimFramgent(era, withPileUp, generator_fragment):
     
     cmssw8_fix = ""
     if era=="16":
         cmssw8_fix = "--outputCommands 'drop *_*_StoppedParticlesName_*' "
+
+    premix_switches = "--step GEN,SIM,DIGI,L1,DIGI2RAW " 
+    if withPileUp:
+         premix_switches = "--step GEN,SIM,DIGI,DATAMIX,L1,DIGI2RAW "
+         premix_switches += pileup_inputs[era]+" "
         
     command = "cmsDriver.py " +\
     "Configuration/GenProduction/python/ThirteenTeV/HSCP/"+generator_fragment+" "\
     "--fileout file:RECO.root " +\
     "--mc --eventcontent RAWSIM --datatier GEN-SIM-DIGI "+\
-    eras_conditions[era] +" "+\
     cmssw8_fix +\
-    "--step GEN,SIM,DIGI,L1,DIGI2RAW "+\
+    premix_switches +\
+    eras_conditions[era] +" "+\
     "--geometry DB:Extended "+\
+    "--procModifiers premix_stage2 --datamix PreMix " +\
     "--customise SimG4Core/CustomPhysics/Exotica_HSCP_SIM_cfi.customise "+\
     "--nThreads 4 "+\
     "--runUnscheduled "+\
     "--python_filename GEN_SIM_DIGI_RAW_step_cfg.py -n 2 --no_exec"
+    print command
     os.system(command)
 #########################################
 #########################################
@@ -38,6 +45,7 @@ def prepareCrabCfg(era,
                    outLFNDirBase,
                    storage_element,
                    outputDatasetTag,
+                   withPileUp,
                    runLocal):
     
     outputDatasetTag = "UL"+era+"_"+outputDatasetTag
@@ -56,7 +64,7 @@ def prepareCrabCfg(era,
     config.JobType.scriptExe = 'runAllSteps_UL'+str(era)+'.py'
     config.JobType.outputFiles = ['RECO.root']
     config.JobType.numCores = 4
-    config.JobType.maxMemoryMB = 5000
+    config.JobType.maxMemoryMB = 10000
     
     config.General.requestName = requestName
     config.General.workArea = "Tasks_UL"+era
@@ -72,7 +80,7 @@ def prepareCrabCfg(era,
     config.Data.unitsPerJob = eventsPerJob
     config.Data.totalUnits = eventsPerJob*numberOfJobs
 
-    createGenSimFramgent(era, generator_fragment)
+    createGenSimFramgent(era, withPileUp, generator_fragment)
 
     if runLocal:
         os.system("cp GEN_SIM_DIGI_RAW_step_cfg.py PSet.py; ./"+config.JobType.scriptExe)
@@ -87,6 +95,12 @@ eras_conditions = {
     "16":"--era Run2_2016 --conditions 106X_mcRun2_asymptotic_v13 --beamspot Realistic25ns13TeV2016Collision "
     }
 
+pileup_inputs = {
+    "18":"--pileup_input \"dbs:/Neutrino_E-10_gun/RunIISummer19ULPrePremix-UL18_106X_upgrade2018_realistic_v11_L1v1-v2/PREMIX\" ",
+    "17":"--pileup_input \"dbs:/Neutrino_E-10_gun/RunIISummer19ULPrePremix-UL17_106X_mc2017_realistic_v6-v1/PREMIX\" ",
+    "16":"--pileup_input \"dbs:/Neutrino_E-10_gun/RunIISummer19ULPrePremix-UL16_106X_mcRun2_asymptotic_v10-v2/PREMIX\" "
+    }
+
 CMSSW_BASE = os.environ.get("CMSSW_BASE")
 genFragmentsDirectory = CMSSW_BASE + "/src/"+ "Configuration/GenProduction/python/ThirteenTeV/HSCP/"
 generator_fragments = [aFile.split("/")[-1] for aFile in glob.glob(genFragmentsDirectory+"HSCPstop*.py")]
@@ -94,12 +108,13 @@ generator_fragments = [aFile.split("/")[-1] for aFile in glob.glob(genFragmentsD
 ##Those are the steering parameters
 generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py"]
 era = "18"
-eventsPerJob = 3
-numberOfJobs = 5
+eventsPerJob = 200
+numberOfJobs = 2
 outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
-outputDatasetTag = "test5"
-runLocal = True
+outputDatasetTag = "test7"
+withPileUp = True
+runLocal = False
 ########################################################
 for aFragment in generator_fragments:
     prepareCrabCfg(era = era,
@@ -109,6 +124,7 @@ for aFragment in generator_fragments:
                    outLFNDirBase = outLFNDirBase, 
                    storage_element=storage_element,
                    outputDatasetTag = outputDatasetTag,
+                   withPileUp = withPileUp,
                    runLocal=runLocal)  
 ########################################################
 
