@@ -9,7 +9,7 @@ config.General.transferLogs = True
 config.section_("JobType")
 config.JobType.pluginName = 'PrivateMC'
 config.JobType.psetName = 'gensim.py'
-config.JobType.maxMemoryMB = 200
+config.JobType.maxMemoryMB = 2000
 
 config.section_("Data")
 config.Data.inputDBS = 'global'

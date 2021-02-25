@@ -20,6 +20,7 @@ def createGenSimFramgent(era, withPileUp, generator_fragment):
     if withPileUp:
          premix_switches = "--step GEN,SIM,DIGI,DATAMIX,L1,DIGI2RAW "
          premix_switches += pileup_inputs[era]+" "
+         premix_switches += "--procModifiers premix_stage2 --datamix PreMix "
         
     command = "cmsDriver.py " +\
     "Configuration/GenProduction/python/ThirteenTeV/HSCP/"+generator_fragment+" "\
@@ -29,7 +30,6 @@ def createGenSimFramgent(era, withPileUp, generator_fragment):
     premix_switches +\
     eras_conditions[era] +" "+\
     "--geometry DB:Extended "+\
-    "--procModifiers premix_stage2 --datamix PreMix " +\
     "--customise SimG4Core/CustomPhysics/Exotica_HSCP_SIM_cfi.customise "+\
     "--nThreads 4 "+\
     "--runUnscheduled "+\
@@ -88,11 +88,13 @@ def prepareCrabCfg(era,
         crabCommand('submit', config = config)
     os.system("rm -f GEN_SIM_DIGI_RAW_step_cfg.py")
 #########################################
+#GT taken from
+#https://twiki.cern.ch/twiki/bin/view/CMS/PdmVRun2LegacyAnalysisSummaryTable
 #########################################
 eras_conditions = {
-    "18":"--era Run2_2018 --conditions 106X_upgrade2018_realistic_v11_L1v1 --beamspot Realistic25ns13TeVEarly2018Collision ",
-    "17":"--era Run2_2017 --conditions 106X_mc2017_realistic_v6 --beamspot Realistic25ns13TeVEarly2017Collision ",
-    "16":"--era Run2_2016 --conditions 106X_mcRun2_asymptotic_v13 --beamspot Realistic25ns13TeV2016Collision "
+    "18":"--era Run2_2018 --conditions 106X_upgrade2018_realistic_v15_L1v1 --beamspot Realistic25ns13TeVEarly2018Collision ",
+    "17":"--era Run2_2017 --conditions 106X_mc2017_realistic_v8 --beamspot Realistic25ns13TeVEarly2017Collision ",
+    "16":"--era Run2_2016 --conditions 106X_mcRun2_asymptotic_v15 --beamspot Realistic25ns13TeV2016Collision "
     }
 
 pileup_inputs = {
@@ -107,12 +109,12 @@ generator_fragments = [aFile.split("/")[-1] for aFile in glob.glob(genFragmentsD
 
 ##Those are the steering parameters
 generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py"]
-era = "18"
+era = "17"
 eventsPerJob = 200
 numberOfJobs = 2
 outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
-outputDatasetTag = "test7"
+outputDatasetTag = "test8"
 withPileUp = True
 runLocal = False
 ########################################################
