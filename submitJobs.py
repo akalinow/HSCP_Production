@@ -84,9 +84,13 @@ def prepareCrabCfg(era,
 
     if runLocal:
         os.system("cp GEN_SIM_DIGI_RAW_step_cfg.py PSet.py; ./"+config.JobType.scriptExe)
-    else:    
-        crabCommand('submit', config = config)
-    os.system("rm -f GEN_SIM_DIGI_RAW_step_cfg.py*")
+    else:
+        out = open('crabTmp.py','w')
+        out.write(config.pythonise_())
+        out.close()
+        os.system("crab submit -c crabTmp.py")
+        #crabCommand('submit', config = config)
+    os.system("rm -f GEN_SIM_DIGI_RAW_step_cfg.py* crabTmp.py*")
 #########################################
 #GT taken from
 #https://twiki.cern.ch/twiki/bin/view/CMS/PdmVRun2LegacyAnalysisSummaryTable
