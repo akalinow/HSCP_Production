@@ -86,7 +86,7 @@ def prepareCrabCfg(era,
         os.system("cp GEN_SIM_DIGI_RAW_step_cfg.py PSet.py; ./"+config.JobType.scriptExe)
     else:    
         crabCommand('submit', config = config)
-    os.system("rm -f GEN_SIM_DIGI_RAW_step_cfg.py")
+    os.system("rm -f GEN_SIM_DIGI_RAW_step_cfg.py*")
 #########################################
 #GT taken from
 #https://twiki.cern.ch/twiki/bin/view/CMS/PdmVRun2LegacyAnalysisSummaryTable
@@ -108,14 +108,14 @@ genFragmentsDirectory = CMSSW_BASE + "/src/"+ "Configuration/GenProduction/pytho
 generator_fragments = [aFile.split("/")[-1] for aFile in glob.glob(genFragmentsDirectory+"HSCPstop*.py")]
 
 ##Those are the steering parameters
-generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py"]
+generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py", "HSCPstoponlyneutral_M_400_TuneCP5_13TeV_pythia8_cff.py"]
 era = "17"
 eventsPerJob = 200
 numberOfJobs = 2
 outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
-outputDatasetTag = "test8"
-withPileUp = True
+outputDatasetTag = "test9"
+withPileUp = False
 runLocal = False
 ########################################################
 for aFragment in generator_fragments:
