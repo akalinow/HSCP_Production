@@ -80,6 +80,12 @@ def prepareCrabCfg(era,
     config.Data.unitsPerJob = eventsPerJob
     config.Data.totalUnits = eventsPerJob*numberOfJobs
 
+    fullWorkDirName = config.General.workArea+"/crab_"+config.General.requestName
+    requestExists = len(glob.glob(fullWorkDirName))!=0
+    if requestExists:
+        print("Request with name: {} exists. Skipping.".format(fullWorkDirName))
+        return
+
     createGenSimFramgent(era, withPileUp, generator_fragment)
 
     if runLocal:
