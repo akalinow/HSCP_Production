@@ -91,7 +91,7 @@ def prepareCrabCfg(dataset,
     
     config.Data.unitsPerJob = eventsPerJob
     config.Data.splitting = 'EventAwareLumiBased'
-    config.Data.totalUnits = 10000
+    config.Data.totalUnits = -1
     config.Data.lumiMask=""
     if dataset.split("/")[2].find("AARun201")!=-1:
         jsonFile = eras_jsons[era]
@@ -125,10 +125,10 @@ eras_jsons = {
 CMSSW_BASE = os.environ.get("CMSSW_BASE")
 
 ##Those are the steering parameters
-eventsPerJob = 2000
+eventsPerJob = 200000
 outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
-outputDatasetTag = "test12"
+outputDatasetTag = "test14"
 
 isSignal = True
 isBckg = False
