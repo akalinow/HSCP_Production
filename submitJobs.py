@@ -59,6 +59,7 @@ def prepareCrabCfg(era,
 
     ##Modify CRAB3 configuration
     config.JobType.allowUndistributedCMSSW = True
+    config.JobType.pluginName = 'PrivateMC'
     config.JobType.psetName = 'GEN_SIM_DIGI_RAW_step_cfg.py'
     config.JobType.disableAutomaticOutputCollection = True
     config.JobType.scriptExe = 'runAllSteps_UL'+str(era)+'.py'
