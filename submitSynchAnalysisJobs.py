@@ -128,7 +128,7 @@ CMSSW_BASE = os.environ.get("CMSSW_BASE")
 eventsPerJob = 2000
 outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
-outputDatasetTag = "test10"
+outputDatasetTag = "test12"
 
 isSignal = True
 isBckg = False
@@ -136,10 +136,10 @@ isData = True
 isSkimmedSample = False
 
 #List od DBS datasetsa to be analyzed
-datasets = {"/SingleMuon/Run2018A-12Nov2019_UL2018_rsb-v1/MINIAOD",
-            #"/SingleMuon/Run2018B-12Nov2019_UL2018-v2/MINIAOD",
-            #"/SingleMuon/Run2018C-12Nov2019_UL2018-v2/MINIAOD",
-            #"/SingleMuon/Run2018D-12Nov2019_UL2018-v4/MINIAOD"
+datasets = {"/SingleMuon/Run2018A-12Nov2019_UL2018_rsb-v1/AOD",
+            #"/SingleMuon/Run2018B-12Nov2019_UL2018-v2/AOD",
+            #"/SingleMuon/Run2018C-12Nov2019_UL2018-v2/AOD",
+            #"/SingleMuon/Run2018D-12Nov2019_UL2018-v4/AOD"
 }
 
 runLocal = False
