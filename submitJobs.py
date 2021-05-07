@@ -90,7 +90,7 @@ def prepareCrabCfg(era,
     createGenSimFramgent(era, withPileUp, generator_fragment)
 
     if runLocal:
-        os.system("cp GEN_SIM_DIGI_RAW_step_cfg.py PSet.py; ./"+config.JobType.scriptExe)
+        os.system("cp GEN_SIM_DIGI_RAW_step_cfg.py PSet.py; ./"+config.JobType.scriptExe + "& ")
     else:
         out = open('crabTmp.py','w')
         out.write(config.pythonise_())
@@ -119,7 +119,8 @@ genFragmentsDirectory = CMSSW_BASE + "/src/"+ "Configuration/GenProduction/pytho
 generator_fragments = [aFile.split("/")[-1] for aFile in glob.glob(genFragmentsDirectory+"HSCPstop*.py")]
 
 ##Those are the steering parameters
-generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py", "HSCPstoponlyneutral_M_400_TuneCP5_13TeV_pythia8_cff.py"]
+generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py",
+                       "HSCPstoponlyneutral_M_400_TuneCP5_13TeV_pythia8_cff.py"]
 era = "17"
 eventsPerJob = 200
 numberOfJobs = 2

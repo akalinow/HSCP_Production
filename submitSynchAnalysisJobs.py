@@ -115,17 +115,18 @@ eras_conditions = {
     "UL16":"106X_mcRun2_asymptotic_v13",
     }
 
+#Official service: https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/
 eras_jsons = {
-"UL16":"https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions16/13TeV/Legacy_2016/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt",
-"UL17":"https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions17/13TeV/Legacy_2017/Cert_294927-306462_13TeV_UL2017_Collisions17_GoldenJSON.txt",
-"UL18":"https://cms-service-dqm.web.cern.ch/cms-service-dqm/CAF/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt"
+"UL16":"http://akalinow.web.cern.ch/akalinow/certification/Collisions16/13TeV/Legacy_2016/Cert_271036-284044_13TeV_Legacy2016_Collisions16_JSON.txt",
+"UL17":"http://akalinow.web.cern.ch/akalinow/certification/Collisions17/13TeV/Legacy_2017/Cert_294927-306462_13TeV_UL2017_Collisions17_GoldenJSON.txt",
+"UL18":"http://akalinow.web.cern.ch/akalinow/certification/Collisions18/13TeV/Legacy_2018/Cert_314472-325175_13TeV_Legacy2018_Collisions18_JSON.txt"
 }
 ########################################################
 
 CMSSW_BASE = os.environ.get("CMSSW_BASE")
 
 ##Those are the steering parameters
-eventsPerJob = 200000
+eventsPerJob = 400000
 outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
 outputDatasetTag = "test14"
