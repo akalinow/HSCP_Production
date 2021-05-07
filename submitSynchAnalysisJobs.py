@@ -76,7 +76,7 @@ def prepareCrabCfg(dataset,
     config.JobType.disableAutomaticOutputCollection = True
     config.JobType.scriptExe = 'runMuonTimingStudy.py'
     config.JobType.inputFiles = ['CMS_GeomTree.root', 'MuonTimingStudy.C', 'Analysis_TOFUtility.h']
-    config.JobType.outputFiles = ['EDMCandidates.root','DT_SynchHistos.root']
+    config.JobType.outputFiles = ['DT_SynchHistos.root']
     
     config.General.requestName = requestName
     config.General.workArea = "Tasks_"+era
