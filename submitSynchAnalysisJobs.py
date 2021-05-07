@@ -93,7 +93,7 @@ def prepareCrabCfg(dataset,
     config.Data.splitting = 'EventAwareLumiBased'
     config.Data.totalUnits = -1
     config.Data.lumiMask=""
-    if dataset.split("/")[2].find("AARun201")!=-1:
+    if dataset.split("/")[2].find("Run201")!=-1:
         jsonFile = eras_jsons[era]
         command = "wget "+jsonFile
         os.system(command)
