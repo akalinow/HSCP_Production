@@ -1,1 +1,0 @@
-../CMSSW_10_6_12/src/SUSYBSMAnalysis/HSCP/test/UsefulScripts/DumpGeometry/GeomDumpConfig_cfg.py
