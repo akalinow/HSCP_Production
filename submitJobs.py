@@ -12,8 +12,9 @@ from crab3 import *
 
 def createGenSimRecoFramgent(era, withPileUp, generator_fragment):
     
-    premix_switches = "--step GEN,SIM,DIGI,L1,HLT:GRun,RAW2DIGI,L1Reco,RECO, RECOSIM"
-    premix_switches = "--step GEN,SIM,DIGI,L1,L1Reco " 
+    #premix_switches = "--step GEN,SIM,DIGI,L1,HLT:GRun,RAW2DIGI,L1Reco,RECO, RECOSIM"
+    premix_switches = "--step GEN,SIM,DIGI,L1,DIGI2RAW,L1Reco,HLT:GRun,RECO "
+    premix_switches = "--step GEN,SIM,DIGI,L1,DIGI2RAW,L1Reco "
     if withPileUp:
          premix_switches = premix_switches.replace("DIGI","DIGI,DATAMIX")
          premix_switches += pileup_inputs[era]+" "
@@ -23,13 +24,14 @@ def createGenSimRecoFramgent(era, withPileUp, generator_fragment):
         premix_switches = premix_switches.replace("L1,DIGI2RAW","L1TrackTrigger,L1,DIGI2RAW")
         premix_switches += "--customise SLHCUpgradeSimulations/Configuration/aging.customise_aging_1000 "
         premix_switches += "--customise Configuration/DataProcessing/Utils.addMonitoring "
-        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_L1TkMuonsGmt "     
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_L1TkMuonsGmt "
+        premix_switches += "--customise UserCode/OmtfAnalysis/privateCustomizations.customize_outputCommands "     
         
     command = "cmsDriver.py " +\
     "Configuration/GenProduction/python/ThirteenTeV/HSCP/"+generator_fragment+" "+\
     "--processName fullsim " +\
-    "--fileout file:RECOSIM.root " +\
-    "--mc --eventcontent RECOSIM --datatier GEN-SIM-DIGI "+\
+    "--fileout file:FEVTSIM.root " +\
+    "--mc --eventcontent FEVTSIM "+\
     premix_switches +\
     eras_conditions[era] +" "+\
     "--customise SimG4Core/CustomPhysics/Exotica_HSCP_SIM_cfi.customise "+\
@@ -119,9 +121,9 @@ eventsPerJob = 10
 numberOfJobs = 2
 outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
-outputDatasetTag = "test_20_10_2022"
+outputDatasetTag = "test_27_10_2022"
 withPileUp = False
-runLocal = False
+runLocal = True
 ########################################################
 for aFragment in generator_fragments:
     prepareCrabCfg(era = era,
