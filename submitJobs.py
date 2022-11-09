@@ -114,16 +114,16 @@ generator_fragments = [aFile.split("/")[-1] for aFile in glob.glob(genFragmentsD
 
 ##Those are the steering parameters
 generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py",
-                       #"HSCPstoponlyneutral_M_400_TuneCP5_13TeV_pythia8_cff.py"
-]
+                       #"HSCPppstau_M_200_TuneZ2star_13TeV_pythia6_cff.py"                       
+                       ]
 era = "Run2029"
-eventsPerJob = 10
-numberOfJobs = 2
+eventsPerJob = 100
+numberOfJobs = 10
 outLFNDirBase = "/store/user/akalinow/HSCP/"
 storage_element="T2_PL_Swierk"
-outputDatasetTag = "test_27_10_2022"
+outputDatasetTag = "test_03_11_2022"
 withPileUp = False
-runLocal = True
+runLocal = False
 ########################################################
 for aFragment in generator_fragments:
     prepareCrabCfg(era = era,

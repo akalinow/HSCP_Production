@@ -9,15 +9,27 @@ DBS for further usage, like [those test samples](https://cmsweb.cern.ch/das/requ
 
 ## Installation instructions:
 
-* setup the CMSSW_12_3_0_pre4 work area according to the
+* setup foloows the instruwions from 
   [TWiki](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TPhase2Instructions#CMSSW_12_3_0_pre4)
+  for  CMSSW_12_3_0_pre4:
   
-* add HSCP generator framgents:
 ```
+cmsrel CMSSW_12_3_0_pre4
 cd CMSSW_12_3_0_pre4/src
 cmsenv
+git cms-init
 mkdir -p Configuration/GenProduction/
-git clone git@github.com:cms-sw/genproductions.git Configuration/GenProduction/
+git clone git@github.com:cms-sw/genproductions.git Configuration/GenProduction
+mv  Configuration/GenProduction/genfragments Configuration/GenProduction/python
+rm -rf  Configuration/GenProduction/python/ThirteenTeV/DisappTrksAMSB/
+rm -rf  Configuration/GenProduction/python/ThirteenTeV/DelayedJets/
+rm -rf  Configuration/GenProduction/python/ThirteenTeV/DMSIMP_Extensions
+rm -f   Configuration/GenProduction/python/EightTeV/Exotica_HSCP_SIM_cfi.py
+git cms-merge-topic -u cms-l1t-offline:l1t-phase2-v3.4.44
+git cms-merge-topic -u kbunkow:from-CMSSW_12_3_0_pre4_KB_p2GmtV2
+git clone -b devel_AK git@github.com:akalinow/usercode-OmtfAnalysis UserCode/
+git clone  git@github.com:kbunkow/usercode
+scram b -j 4
 ```
 
 ## Run instructions
