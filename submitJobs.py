@@ -113,8 +113,9 @@ genFragmentsDirectory = CMSSW_BASE + "/src/"+ "Configuration/GenProduction/pytho
 generator_fragments = [aFile.split("/")[-1] for aFile in glob.glob(genFragmentsDirectory+"HSCPstop*.py")]
 
 ##Those are the steering parameters
-generator_fragments = ["HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py",
-                       #"HSCPppstau_M_200_TuneZ2star_13TeV_pythia6_cff.py"                       
+generator_fragments = [#"HSCPstop_M_800_TuneCP5_13TeV_pythia8_cff.py",
+                       #"HSCPppstau_M_200_TuneZ2star_13TeV_pythia6_cff.py",
+                       "HSCPppstau_M_432_TuneZ2star_13TeV_pythia6_cff.py"                       
                        ]
 era = "Run2029"
 eventsPerJob = 100
